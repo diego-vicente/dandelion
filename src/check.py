@@ -1,7 +1,11 @@
-from phonetic import get_consonant_sounds, get_perfect_sounds, get_vowel_sounds
+from phonetic import (
+    get_consonant_phonemes,
+    get_perfect_phonemes,
+    get_vowel_phonemes
+)
 
 
-def _rhyme(word_a, word_b, sounds_func):
+def _rhyme(word_a, word_b, phonemes_func):
     """Return whether two words form a rhyme.
 
     This function is just a general version and the shorthands available in the
@@ -10,15 +14,13 @@ def _rhyme(word_a, word_b, sounds_func):
 
     :param word_a: first word.
     :param word_b: second word.
-    :param sounds_func: function to extract relevant phonemes.
+    :param phonemes_func: function to extract relevant phonemes.
 
     :returns: True if they rhyme following the given conditions.
 
     :rtype: bool
     """
-    sounds_a = sounds_func(word_a)
-    sounds_b = sounds_func(word_b)
-    return sounds_a == sounds_b
+    return phonemes_func(word_a) == phonemes_func(word_b)
 
 
 def perfect_rhyme(word_a, word_b):
@@ -30,7 +32,7 @@ def perfect_rhyme(word_a, word_b):
     :rtype: bool
 
     """
-    return _rhyme(word_a, word_b, get_perfect_sounds)
+    return _rhyme(word_a, word_b, get_perfect_phonemes)
 
 
 def vowel_rhyme(word_a, word_b):
@@ -42,7 +44,7 @@ def vowel_rhyme(word_a, word_b):
     :rtype: bool
 
     """
-    return _rhyme(word_a, word_b, get_vowel_sounds)
+    return _rhyme(word_a, word_b, get_vowel_phonemes)
 
 
 def consonant_rhyme(word_a, word_b):
@@ -54,4 +56,4 @@ def consonant_rhyme(word_a, word_b):
     :rtype: bool
 
     """
-    return _rhyme(word_a, word_b, get_consonant_sounds)
+    return _rhyme(word_a, word_b, get_consonant_phonemes)
